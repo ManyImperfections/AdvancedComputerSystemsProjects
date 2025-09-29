@@ -1,4 +1,2 @@
-Terminal Commands:
-	sysctl hw.cachelinesize
-	sysctl -a | grep cache
-	clang++ PointerChasingLatency.cpp -O3 -std=c++17 -o PointerChasingLatency.out
+I will be using a windows computer for this one.
+CPU: Intel(R) Core(TM) i9-9900K CPU @ 3.60GHz (3.60 GHz)
