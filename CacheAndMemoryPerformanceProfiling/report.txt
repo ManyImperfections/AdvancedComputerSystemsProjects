@@ -1,0 +1,4 @@
+Terminal Commands:
+	sysctl hw.cachelinesize
+	sysctl -a | grep cache
+	clang++ PointerChasingLatency.cpp -O3 -std=c++17 -o PointerChasingLatency.out

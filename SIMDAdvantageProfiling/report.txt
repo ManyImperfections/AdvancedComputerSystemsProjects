@@ -7,7 +7,7 @@ I will compare scalar vs SIMD across cache regimes, alignment, stride and data t
 CPU: Apple M1 Pro
 SIMD ISA: NEON
 Clock frequency: 3.2 GHZ Max
-Chaches: L1 = 2.25 MB , L2 = 8 MB , LLC = 24 MB
+Chaches: L1 = 128 KB , L2 = 8 MB , LLC = 24 MB
 
 Compiler: Apple Clang 17.0.0
 Compiler Lines/flags:
