@@ -1,0 +1,9 @@
+Scalar Compile:
+Type    Speedup  GFLOP/s(scalar)    GFLOP/s(vector)
+Float   1.054523 2.025173           2.135593
+Double  0.993567 2.627875           2.610970
+
+SIMD Compile:
+Type    Speedup  GFLOP/s(scalar)    GFLOP/s(vector)
+Float   1.002334 16.666020          16.704917
+Double  0.993075 3.544978           3.520430

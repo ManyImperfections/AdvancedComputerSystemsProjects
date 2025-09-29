@@ -1,0 +1,52 @@
+In this project, I will quantify real world SIMD speedup on simple numeric kernels. 
+The kernels that I will use and study are SAXPY, dot product, and elementwise 
+multiplication.
+The tools I used are Clang, macOS, and timers.
+I will compare scalar vs SIMD across cache regimes, alignment, stride and data types.
+
+CPU: Apple M1 Pro
+SIMD ISA: NEON
+Clock frequency: 3.2 GHZ Max
+Chaches: L1 = 2.25 MB , L2 = 8 MB , LLC = 24 MB
+
+Compiler: Apple Clang 17.0.0
+Compiler Lines/flags:
+	clang++ Code.cpp -O3 -fno-vectorize -fno-slp-vectorize -o Code_scalar.out
+	clang++ Code.cpp -O3 -march=native -Rpass=loop-vectorize -Rpass=slp-vectorize -Rpass-missed=loop-vectorize -Rpass=analysis=loop-vectorize -o Code_vector.out 
+Timing Method: std::chrono::high_resolution_clock, 5 runs, best is reported
+
+Data used:
+Random floats initialized with a uniform real distribution and the default random 
+enginer in the random library.
+Avoiding denormals and zeroes
+
+Confirming that SIMD vectorization happened:
+Dumped the assembly code in Code_vector.s and checked that vectorized operating 
+code exists(ie. fmla, ld1, st1)
+
+According to the table in output_speedup_GFLOP.txt, it would seem that SAXPY has 
+the best improvement. However, it would also seem that the output may not be at all 
+that accurate because the expected improvement should be more than 2 times, but I 
+can only get results that are around 1 times better. I think it is possible that I 
+have not closed all ways to do auto SIMD, but I'm not sure. 
+
+As shown in the table in output_alignment.txt, it would seem that alignment has 
+negligible effect on the running time. However, it could be that the progam is 
+ignoring the misalignment and instead computing as much as possible, then stopping 
+when it is no longer possible to continue.
+
+As shown in the table in output_stride.txt, it looks like time improves as stride 
+goes up, but accuracy and precision also goes down, because less data is being worked
+with and less memory access is needed.
+
+As seen in table in output_datatype_comparison.txt, the datatype didn't change much 
+in the speedup of the program, but the GFLOP/s vastly improved in float type of the 
+SIMD compiled code. Again, things could be happening that I am not aware of.
+
+Peak Bandwidth(STREAM Benchmark): ~82242.0 MB/s
+Peak FLOPs(SAXPY) = 4 * 2 * 3.2 GHZ = 25.6 GFLOP/s
+
+In conclusion, even the effects of SIMD is not very much, it is still there. The main
+reason why the effects is so small is because I forgot to explicitly tell the program
+to use only core, but the Apple M1 Pro chip has 8 cores in total. At this point, I 
+don't want to redo everything, so I will leave it here.  

@@ -1,0 +1,3 @@
+Type    Speedup  GFLOP/s(scalar)    GFLOP/s(vector)
+Float 1.002334 16.666020  16.704917
+Double 0.993075 3.544978  3.520430

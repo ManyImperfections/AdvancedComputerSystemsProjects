@@ -1,0 +1,13 @@
+Scalar Compile: All times in ms
+        Aligned             Unaligned           Multiples
+        scalar    vector    scalar    vector    scalar    vector 
+SAXPY   0.004978  0.003757  0.005132  0.004882  0.005062  0.005078  
+DOT     0.000000  0.000000  0.000000  0.000000  0.000000  0.000000  
+ELEMENT 0.003267  0.003282  0.003251  0.003266  0.003264  0.003265  
+
+SIMD Compile: All times in ms
+        Aligned             Unaligned           Multiples
+        scalar    vector    scalar    vector    scalar    vector 
+SAXPY   0.001513  0.001385  0.001373  0.001378  0.001377  0.001368  
+DOT     0.000000  0.000000  0.000000  0.000000  0.000000  0.000000  
+ELEMENT 0.001729  0.001568  0.001544  0.001555  0.001569  0.001549  

@@ -1,0 +1,23 @@
+Scalar Compile: All times in ms
+Arraysize  SAXPY_speedup SAXPY_GFLOP/s     DOT_speedup  DOT_GFLOP/s            ELEMENT_speedup  ELEMENT_GFLOP/s 
+                         scalar   vector                scalar    vector                        scalar vector  
+1e1        1.000000x     0.487805 0.487805 0.000000x    inf       0.487805     1.024390x        0.238095 0.243902 
+1e2        1.000000x     2.409639 2.409639 1.000000x    4.878049  4.878049     0.672000x        1.190476 0.800000 
+1e3        0.949640x     2.525253 2.398082 1.000000x    48.780488 48.780488    1.053097x        1.200480 1.264223 
+1e4        0.994581x     2.594707 2.580645 0.000000x    inf       487.804878   1.005449x        1.290323 1.297353 
+1e5        0.965335x     2.572347 2.483176 nanx         inf       inf          1.000000x        1.506591 1.506591 
+1e6        1.001336x     2.912624 2.916515 infx         48780.487 inf          1.076855x        2.571792 2.769446 
+1e7        1.279092x     4.018485 5.140013 nanx         inf       inf          0.985290x        3.094139 3.048625 
+1e8        0.956633x     5.021609 4.803838 nanx         inf       inf          0.990511x        2.920351 2.892640 
+
+SIMD Compile: All times in ms
+Arraysize  SAXPY_speedup SAXPY_GFLOP/s        DOT_speedup  DOT_GFLOP/s              ELEMENT_speedup  ELEMENT_GFLOP/s 
+                         scalar     vector                 scalar      vector                        scalar    vector  
+1          nanx          inf        inf       nanx         inf         inf          nanx             inf       inf 
+2          nanx          inf        inf.      nanx         inf         inf          infx             2.439024  inf 
+3          2.024390x     24.096386  48.780488 nanx         inf         inf          1.976190x        12.048193 23.809524 
+4          1.070205x     32.000000  34.246575 nanx         inf         inf          1.000000x        17.152659 17.152659 
+5          1.003644x     17.713223  17.777778 1.000000x    4878.048780 4878.048780  1.000027x        2.669585  2.669657 
+6          1.125847x     9.580838   10.786556 0.000000x    inf         48780.487805 1.087772x        6.051437  6.582585 
+7          1.014304x     14.279758  14.484011 nanx         inf         inf          0.959084x        6.399148  6.137323 
+8          1.079101x     11.892933  12.833676 nanx         inf         inf          0.999690x        6.054536  6.052658 
