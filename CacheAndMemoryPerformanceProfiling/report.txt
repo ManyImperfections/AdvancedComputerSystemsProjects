@@ -1,1 +1,7 @@
+Hardware stuff
+CPU: Apple M1 Pro
+SIMD ISA: NEON
+Clock frequency: 3.2 GHZ Max
+Chaches: L1 = 128 KB , L2 = 8 MB , LLC = 24 MB
 
+Compiler: Apple Clang 17.0.0
