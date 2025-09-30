@@ -5,3 +5,48 @@ Clock frequency: 3.2 GHZ Max
 Chaches: L1 = 128 KB , L2 = 8 MB , LLC = 24 MB
 
 Compiler: Apple Clang 17.0.0
+
+Terminal Commands:
+	sysctl hw.cachelinesize
+	sysctl -a | grep cache
+	clang -O3 -std=c11 -march=native -o Benchmark.out Benchmark.c -lpthread
+	./Benchmark.out pc --size 268435456 --stride 64 --iters 1000 --repeats 5
+	./Benchmark.out pc --size 1048576 --stride 64 --iters 1000 --repeats 5
+	./Benchmark.out pc --size 65536	 --stride 64 --iters 1000 --repeats 5
+	./Benchmark.out stream --size 8388608 --stride 8 --mix 1.0 --iters 100 --repeats 5
+	./Benchmark.out stream --size 8388608 --stride 64 --mix 1.0 --iters 100 --repeats 5
+	./Benchmark.out stream --size 8388608 --stride 256 --mix 1.0 --iters 100 --repeats 5
+	./Benchmark.out stream --size 8388608 --stride 1024 --mix 1.0 --iters 100 --repeats 5
+	./Benchmark.out stream --size 8388608 --stride 8 --mix 0.0 --iters 100 --repeats 5
+	./Benchmark.out stream --size 8388608 --stride 8 --mix 0.7 --iters 100 --repeats 5
+	./Benchmark.out stream --size 8388608 --stride 8 --mix 0.5 --iters 100 --repeats 5
+	./Benchmark.out intensity --size 16777216 --stride 8 --iters 50 --maxthreads 8
+	./Benchmark.out saxpy --size 33554432 --iters 50 --repeats 5
+	./Benchmark.out saxpy --size 335544 --iters 50 --repeats 5
+	./Benchmark.out saxpy --size 3355 --iters 50 --repeats 5
+
+Given that I am using a MacOS, I couldn't use the suggested software. I was, also, 
+not able to find an alternative version of the softwares, so I opted to write my own
+benchmarking program to use for this project.
+
+The results in Pointer_Chase.png shows to me that it is very likely that on average 
+the time per access indicated by the last column of each row is about the same 
+across a large range of sizes. This is likely because of the way the Apple M1 chip
+was built. The Apple M1 chip has a lot of memory sharing across levels.
+
+The results in Streaming_Bandwidth.png indicates that as stride goes up, GiB/s goes 
+down, and total Bytes accessed goes down, too. 
+
+The results in Streaming_Mixed.png shows that a mix of reads and writes provides the
+best throughput because at a read and write ratio of 50%, I got around 52 GiB/s, 
+while a read and write ratio of 100% and 0% provides around 2 GiB/s and 35 GiB/s 
+respectively. 
+
+The results in Intensity.png shows that as the number of threads goes up, average 
+latency goes up and total GiB/s goes up, too. The average latency only really starts 
+to go up after a more than 8 threads. This is most likely because threads would start
+to have to wait for other threads, which have to wait for other threads and so on 
+and so forth. This is seen when total GiB/s dropped after around 32 threads because 
+it would mean that threads are starting to have wait longer for the information they
+need.
+
