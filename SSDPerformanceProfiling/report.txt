@@ -1,0 +1,12 @@
+Disclaimer: Project done with help ChatGPT
+
+Hardware & Software stuff
+CPU: Apple M1 Pro
+SSD: Apple SSD AP0512R
+Interface: Apple Proprietary 12+16 pin connector
+OS: MacOS Sequioa 15.7
+Tool: fio 3.41 with posixaio enginer
+Test Target: Sparse file created using "truncate -s 40G /Volumes/Test/testfile.bin"
+
+According to the graph in qd_sweep.png, IOPS increases as queue depth increases and 
+MB/s stays about the same. 
